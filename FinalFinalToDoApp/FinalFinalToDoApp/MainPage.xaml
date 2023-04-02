@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:FinalFinalToDoApp.ViewModels"
+             x:Class="FinalFinalToDoApp.MainPage">
+
+    <ContentPage.BindingContext>
+        <viewmodels:MainViewModel/>
+    </ContentPage.BindingContext>
+    <StackLayout>
+
+        <StackLayout >
+            <Entry Placeholder="Enter a new item" Text="{Binding NewTaskText}"
+                   />
+            <Button Text="Add" Command="{Binding AddTaskCommand}"/>
+            <ListView ItemsSource="{Binding Tasks}" SelectedItem="{Binding SelectedTask}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" RadioButtonGroup.GroupName="Radio" RadioButtonGroup.SelectedValue="{Binding IsDone}">
+                                <Label Text="{Binding Text}" />
+                                <RadioButton Content="Done" Value="Done"/>
+                                <RadioButton Content="Not Done" Value="Not Done"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+
+
+        <StackLayout>
+            <Button Text="Remove" Command="{Binding RemoveTaskCommand}"/>
+
+            <ListView ItemsSource="{Binding DeletedTasks}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Status: "/>
+                                <Label Text="{Binding TaskStatus}"/>
+                                <Label Text="{Binding Text}"/>
+
+
+
+
+                            </StackLayout>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+
+
+
+            </ListView>
+
+
+        </StackLayout>
+
+
+
+    </StackLayout>
+
+</ContentPage>
